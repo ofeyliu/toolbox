@@ -1,12 +1,19 @@
-cmake_minimum_required(VERSION 2.6)
-project(descriptor)
-# opencv 
+# 声明要求的 cmake 的最低版本
+cmake_minimum_required( VERSION 2.8 )
+
+# 声明一个cmake工程
+set( PROJECT_NAME imageBasics )
+project( ${PROJECT_NAME} )
+
+# 添加C++ 11标准支持
+set( CMAKE_CXX_FLAGS "-std=c++11" )
+
+# 寻找OpenCV库
 find_package( OpenCV REQUIRED )
+# 添加头文件
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
-message(STATUS "Opencv include dir found at ${OpenCV_INCLUDE_DIRS}")
-message(STATUS "Opencv lib dir found at ${OpenCV_LIBS}")
 
-add_executable(descriptor descriptor_extractor_matcher.cpp)
-target_link_libraries( descriptor ${OpenCV_LIBS} )
-install(TARGETS descriptor RUNTIME DESTINATION bin)
+add_executable( imageBasics imageBasics.cpp )
+# 链接OpenCV库
+target_link_libraries( imageBasics ${OpenCV_LIBS} )
